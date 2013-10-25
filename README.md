@@ -9,8 +9,8 @@ loose reasoning[1^] and obtaining theorems for free[2^].
 
 The goal of this presentation is to demonstrate the efficiency and robustness of
 reasoning about and comprehending source code using types. Some type system
-implementations include properties that diminish the overall value of 
-reliability and this point is a primary one that is addressed directly. 
+implementations include properties that diminish the overall reliability and 
+this point is a primary one that is addressed directly. 
 
 1. [^] Danielsson, N. A., Hughes, J., Jansson, P., & Gibbons, J. (2006, January). Fast and loose reasoning is morally correct. In ACM SIGPLAN Notices (Vol. 41, No. 1, pp. 206-217). ACM.
 

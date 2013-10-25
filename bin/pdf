@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+NAME=parametricity
+DIST=dist
+
+mkdir -p $DIST
+pdflatex -aux-directory=dist -output-directory=dist $NAME.tex
+

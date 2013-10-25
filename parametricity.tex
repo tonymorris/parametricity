@@ -1,0 +1,110 @@
+\documentclass{beamer}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{graphics}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{wasysym}
+\usepackage{listings}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{verbatim}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usetikzlibrary{shapes.callouts,shadows, calc}
+
+\tikzset{note/.style={rectangle callout, rounded corners,fill=gray!20,drop shadow,font=\footnotesize}}    
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}    
+
+\newcounter{image}
+\setcounter{image}{1}
+
+\makeatletter
+\newenvironment{btHighlight}[1][]
+{\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
+{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
+
+\newcommand\btHL[1][]{%
+  \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
+}
+\def\bt@HL@endenv{%
+  \end{btHighlight}%   
+  \egroup
+}
+\newcommand{\bt@HL@box}[2][]{%
+  \tikz[#1]{%
+    \pgfpathrectangle{\pgfpoint{0pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
+    \pgfusepath{use as bounding box}%
+    \node[anchor=base west,rounded corners, fill=green!30,outer sep=0pt,inner xsep=0.2em, inner ysep=0.1em,  #1](a\theimage){\usebox{#2}};
+  }%
+ \stepcounter{image}
+}
+\makeatother
+
+\usetheme{Warsaw}
+\usecolortheme{lily}
+\setbeamercovered{transparent}
+\setbeamertemplate{headline}{
+  \begin{beamercolorbox}{section in head/foot}
+    \vskip2pt\insertnavigation{\paperwidth}\vskip2pt
+  \end{beamercolorbox}
+}
+
+\setbeamertemplate{footline}{
+}
+
+\author{
+  {\tiny Tony Morris\\}
+}
+
+\xdefinecolor{darkgreen}{rgb}{0,0.35,0}
+\lstset{
+  tabsize=2,
+  basicstyle=\ttfamily,
+  moredelim=**[is][\btHL]{`}{`}
+}
+\lstdefinestyle{java}{
+  language=java,
+  basicstyle=\footnotesize\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\footnotesize\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
+}
+  
+% #866eaa
+\definecolor{nicta-purple}{rgb}{0.5234,0.4297,0.6640}
+
+\defbeamertemplate*{title page}{customized}[1][] {
+  \centering
+  \color{nicta-purple}
+  \usebeamerfont{title}\inserttitle\par
+  \bigskip
+  \usebeamerfont{subtitle}\insertsubtitle\par
+  \bigskip
+  \bigskip
+  \bigskip
+  \bigskip
+  \usebeamerfont{author}\insertauthor\par
+  \bigskip
+  \usebeamerfont{institute}\insertinstitute\par
+  % \usebeamerfont{date}\insertdate\par
+  \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+}
+
+\begin{document}
+\title{\large Parametricity}
+\subtitle{\small Types Are Documentation}
+\institute[NICTA]{\includegraphics[width=0.2\textwidth]{image/nicta.jpg}}
+\tiny{\date
+
+}
+
+\setbeamercovered{transparent}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\end{document}

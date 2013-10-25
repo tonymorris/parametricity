@@ -1,0 +1,108 @@
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Monomorphic Signature}
+\begin{itemize}
+  \item Examining the signature \lstinline[style=scala]{Int => Int}
+  \item We see a lot of things this function does \emph{not} do
+  \item For example, it never returns \lstinline[style=scala]{"abc"}
+  \item However, there is a \emph{bucket load} of possible things it does do
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Another monomorphic example}
+\begin{itemize}
+  \item Examining the signature \lstinline[style=scala]{List[Int] => List[Int]}
+  \item For example, it might add all the \lstinline{Int}s and return a list arrangement that depends on whether or not the result is a prime number
+  \item The possibilities are \emph{enormous}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Parametric Signature}
+\begin{lstlisting}[style=scala]
+def `irrelevant`[A](x: List[A]): List[A]
+\end{lstlisting}
+\begin{itemize}
+  \item We can immediately assert, with confidence, a lot of things about how this function works \emph{because it is parametric\footnote{or polymorphic}}
+  \item<2> In other words, \emph{parametricity} has improved readability
+  \item<2> Really? By how much?
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{lstlisting}[style=scala]
+def `irrelevant`[A](x: List[A]): List[A] = 
+  ...
+\end{lstlisting}
+\begin{theorem}Every \lstinline{A} element in the result list appears in the input list\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{I know this because \ldots}
+\begin{itemize}
+  \item<1> Because I am the boss and I said so
+  \item<2> Because Reliable Rob told me so
+  \item<3> Because the \emph{function name} told me so
+  \item<4> Because the comment told me so
+  \item<5> \textbf{Because it would not have compiled otherwise}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Another example}
+\begin{lstlisting}[style=scala]
+def reverse[A, B](x: List[A]): List[B] = 
+  ...
+\end{lstlisting}
+\end{block}
+\begin{theorem}This function reverses the input list, because the name says so\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Lies}
+\begin{lstlisting}[style=scala]
+def reverse[A, B](x: List[A]): List[B] = 
+  ...
+\end{lstlisting}
+\end{block}
+\begin{theorem}This function \textbf{always} returns \lstinline{Nil} otherwise it would not have compiled\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Uninhabited Example}
+\begin{lstlisting}[style=scala]
+def irrelevant[A, B](a: A): B = 
+  ...
+\end{lstlisting}
+\end{block}
+\begin{theorem}This function \textbf{never} returns because it will never compile\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reasoning with parametricity}
+\begin{block}{Fast and loose reasoning is morally correct \cite{danielsson2006fast}}
+\small{Functional programmers often reason about programs as if
+they were written in a total language, expecting the results
+to carry over to non-total (partial) languages. We justify
+such reasoning.}
+\end{block}
+What does this mean exactly?
+\end{frame}
+
+% [a] -> [a]
+% [a] -> Int
+% [a] -> [b]
+% (a -> b) -> (b -> c) -> (a -> c)
+% (a -> m Bool) -> [a] -> m [a]

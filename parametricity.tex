@@ -8,6 +8,7 @@
 \usepackage{listings}
 \usepackage{tikz}
 \usepackage{amssymb}
+\usepackage[normalem]{ulem}
 \usepackage{textcomp}
 \usepackage{verbatim}
 \usepackage[T1]{fontenc}
@@ -73,7 +74,32 @@
   tabsize=2,
   moredelim=**[is][\btHL]{`}{`}
 }
-  
+\lstdefinelanguage{scala}{
+  morekeywords={abstract,case,catch,class,def,%
+    do,else,extends,false,final,finally,%
+    for,forSome,if,implicit,import,lazy,match,%
+    new,null,object,override,package,%
+    private,protected,requires,return,sealed,%
+    super,this,throw,trait,true,try,%
+    type,val,var,while,with,yield},
+  otherkeywords={=,=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+\lstdefinestyle{scala}{
+  language=scala,
+  basicstyle=\footnotesize\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\footnotesize\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
+}
+
 % #866eaa
 \definecolor{nicta-purple}{rgb}{0.5234,0.4297,0.6640}
 
@@ -94,6 +120,8 @@
   \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
 }
 
+\logo{\includegraphics[height=0.8cm]{image/nicta.jpg}}
+
 \begin{document}
 \title{\large Parametricity}
 \subtitle{\small Types Are Documentation}
@@ -101,10 +129,18 @@
 \tiny{\date
 
 }
+\normalsize
 
 \setbeamercovered{transparent}
 \begin{frame}
   \titlepage
 \end{frame}
+
+\input{journey}
+\input{scala}
+\input{lossful-reasoning}
+\input{reasoning-with-parametricity}
+\input{fast-and-loose-reasoning}
+\input{references}
 
 \end{document}

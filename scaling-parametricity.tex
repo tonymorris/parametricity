@@ -1,0 +1,44 @@
+\begin{frame}[fragile]
+\frametitle{Scaling Parametricity}
+\begin{lstlisting}[style=scala]
+def forallM[F[_]: Monad]
+  (p: A => F[Boolean], o: Option[A]): F[Boolean]
+\end{lstlisting}
+\begin{theorem}
+  The \lstinline{Boolean} result depends on zero or more of
+  \begin{itemize}
+    \item Whether the \lstinline{Option} is a \lstinline{Some} or \lstinline{None}.
+    \item If the \lstinline{Option} is a \lstinline{Some}, then the result of having applied the given function to the \lstinline{Some} value.
+  \end{itemize}
+\end{theorem}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scaling Parametricity}
+  We can conclude that there are 8 possible inhabitants \ref{forallM}:
+  \begin{enumerate}
+    \item always \lstinline{false}
+    \item always \lstinline{true}
+    \item \lstinline{o.isDefined}
+    \item \lstinline{o.isEmpty}
+    \item \lstinline{Some(a) => p(a) else false}
+    \item \lstinline{Some(a) => p(a) else true}
+    \item \lstinline{Some(a) => !p(a) else false}
+    \item \lstinline{Some(a) => !p(a) else true}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scaling Parametricity}
+  \begin{block}{Importantly}
+  The implementation may only use the monad primitive operations, even though the use-case may apply a specific monad context.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Scaling Parametricity}
+  \begin{block}{For example}
+  The \lstinline{forallM} function definitely does not perform any IO effects, even though the function user may apply that specific use-case.
+  \end{block}
+  and so on \ldots
+\end{frame}

@@ -14,7 +14,7 @@
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{Scala has a few escape hatches}
+\begin{block}{Scala has a \sout{few} lot of escape hatches}
 \begin{itemize}
   \item \lstinline{null}
   \item exceptions
@@ -45,8 +45,8 @@ Well, not if you don't even have a list.
 \framesubtitle{\lstinline{type-casing} escape hatch}
 \begin{lstlisting}[style=scala]
 def `irrelevant`[A](x: A): Boolean = 
-  if(x.isInstanceOf[Int])
-  else x match {
+  x.isInstanceOf[Int] ||
+  x match {
     case (s: String) => s.length < 10
   }
 \end{lstlisting}
@@ -158,18 +158,6 @@ And we do.
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{The Lyk Woteva Method}
-\begin{itemize}
-  \item<1> I have seen allegations that the identifier name assists readability.
-  \item<2> I have then seen the execution of this practice, where the best possible outcome is neutral
-  \item<3> No new information is learned, the most common result being a belief of having learned information, that is in fact, innaccurate
-  \item<4> Perhaps there is a desirable effect, but for now, parametricity appears more efficient and reliable
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
 \begin{itemize}
   \item<1> Fast and loose reasoning justifies reasoning as if we were in a total language
   \item<2> But it does not justify letting go of any possible reasoning ability
@@ -199,7 +187,10 @@ And we do.
 \frametitle{Fast and Loose Reasoning}
 \framesubtitle{It works}
 \begin{center}
-Parametricity works
+Parametricity is principled and it works
+\end{center}
+\begin{center}
+\includegraphics[height=3.8cm]{image/AbstractWigglyTwoppedHoopyWrapperZipdiddyQuip.png}
 \end{center}
 \begin{center}
 If you do not exploit it, I will judge you

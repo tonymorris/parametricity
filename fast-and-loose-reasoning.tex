@@ -45,8 +45,8 @@ Well, not if you don't even have a list.
 \framesubtitle{\lstinline{type-casing} escape hatch}
 \begin{lstlisting}[style=scala]
 def `irrelevant`[A](x: A): Boolean = 
-  if(x.isInstanceOf[Int])
-  else x match {
+  x.isInstanceOf[Int] ||
+  x match {
     case (s: String) => s.length < 10
   }
 \end{lstlisting}

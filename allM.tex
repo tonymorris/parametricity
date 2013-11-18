@@ -1,0 +1,41 @@
+\appendix
+\section{allM has 8 inhabitants}
+\tiny
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ _ = return False
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ _ = return True
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return False
+allM _ (Just _) = return True
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return True
+allM _ (Just _) = return False
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return False
+allM p (Just a) = p a
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return True
+allM p (Just a) = p a
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return False
+allM p (Just a) = p a >>= return . not
+\end{lstlisting}
+\begin{lstlisting}[style=haskell]
+allM :: Monad m => (a -> m Bool) -> Maybe a -> m Bool
+allM _ Nothing = return True
+allM p (Just a) = p a >>= return . not
+\end{lstlisting}

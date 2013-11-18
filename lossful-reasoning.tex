@@ -40,13 +40,12 @@ And conclude, yes, this function adds ten to its argument.
 \begin{frame}[fragile]
 \frametitle{Lossful Reasoning}
 \framesubtitle{Sacrificing efficiency to gain unreliability}
-We have just failed the Wason Rule Discovery Test.
 \begin{lstlisting}[style=scala]
 def add10(n: Int): Int =
   if(n < 8000000) n + 10
   else n * 7
 \end{lstlisting}
-This is due to a \emph{confirmation bias\cite{gale2002does}}.
+Wason Rule Discovery Test, \emph{confirmation bias\cite{gale2002does}}.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -62,14 +61,13 @@ add10(-18916712) = -18916702
   \item ``A negligent programmer has misnamed this function"
   \item ``More tests will fix it"
   \item ``Well we can't test everything!"
-  \item revise, ``We have increased the likelihood of our assertion by a non-negligible degree."
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Lossful Reasoning}
 \framesubtitle{Sacrificing efficiency to gain unreliability}
-\begin{center}{We are simply reinforcing the confirmation bias by strengthening 
+\begin{center}{We are reinforcing a confirmation bias by strengthening 
 the excess confidence in our belief that we are being responsible programmers.}
 \end{center}
 \end{frame}
@@ -86,7 +84,7 @@ We aren't.
 \frametitle{Lossful Reasoning}
 \framesubtitle{Sacrificing efficiency to gain unreliability}
 \begin{block}{But\ldots}
-there are {$({2^{32}})^{2^{32}}$} possible implementations. Surely we cannot 
+there are so many possible implementations. Surely we cannot 
 rule out the existence of \emph{all-but-one} of those? We can only rule out a
 \scriptsize{very, very} \tiny{small subset}!
 \end{block}

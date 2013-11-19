@@ -90,6 +90,16 @@
   morestring=[b]',
   morestring=[b]"""
 }
+\lstdefinelanguage{haskell}{
+  morekeywords={class,instance,where,do,data,newtype,default,deriving,module},
+  otherkeywords={<-},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[n]{\{-}{-\}}, 
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
 \lstdefinestyle{scala}{
   language=scala,
   basicstyle=\footnotesize\ttfamily,
@@ -100,13 +110,12 @@
   moredelim=**[is][\btHL]{`}{`}
 }
 \lstdefinestyle{haskell}{
-  language=scala,
-  basicstyle=\footnotesize\ttfamily,
+  language=haskell,
+  basicstyle=\tiny\ttfamily,
   stringstyle=\color{darkgreen}\ttfamily,
   commentstyle=\color{gray}\ttfamily,
-  keywordstyle=\footnotesize\color{blue}\ttfamily,
-  tabsize=2,
-  moredelim=**[is][\btHL]{`}{`}
+  keywordstyle=\tiny\color{blue}\ttfamily,
+  tabsize=2
 }
 % #866eaa
 \definecolor{nicta-purple}{rgb}{0.5234,0.4297,0.6640}

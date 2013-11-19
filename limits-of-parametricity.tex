@@ -1,4 +1,60 @@
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-% compose, filterM
+\begin{lstlisting}[style=scala]
+def thisIsNotReverse[A](x: List[A]): List[A]
+\end{lstlisting}
+OK, so we know that all elements in the result appear in the input.
+\begin{itemize}
+ \item but how do we narrow it down?
+ \item how do we rule out all possibilities for the type but one?
+ \item how do we specifically determine what the function does?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\framesubtitle{No pretending}
+By types (proof) alone, it is not possible to narrow down to one possibility in
+the \emph{general case} \footnote{This is \textbf{not} permission to examine the
+identifier name for clues.}.
+\begin{block}{However}
+\begin{itemize}
+  \item We can provide once-inhabitance for some specific cases.
+  \item Types are proof-positive.
+  \item We have tools to assist us when we come up against these limitations.
+  \item Tests are failed proof-negative.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\framesubtitle{Coding exercise}
+\begin{block}{Produce an implementation that does \textbf{not} reverse}
+\lstinputlisting[style=haskell]{source/ThisIsNotReverseInt.hs}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\framesubtitle{Coding exercise}
+\begin{block}{Produce an implementation that does \textbf{not} reverse}
+\lstinputlisting[style=haskell]{source/ThisIsNotReverseIntAnswer.hs}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\framesubtitle{Coding exercise \textemdash parametric}
+\begin{block}{Produce an implementation that does \textbf{not} reverse}
+\lstinputlisting[style=haskell]{source/ThisIsNotReverseParametric.hs}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\framesubtitle{Coding exercise \textemdash parametric}
+\begin{center}
+We can't!
+\end{center}
 \end{frame}

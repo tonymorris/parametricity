@@ -3,7 +3,7 @@
 \begin{lstlisting}[style=scala]
 def thisIsNotReverse[A](x: List[A]): List[A]
 \end{lstlisting}
-OK, so we know that all elements in the result appear in the input.
+OK, so we know that all elements in the result appear in the input
 \begin{itemize}
  \item but how do we narrow it down?
  \item how do we rule out all possibilities for the type but one?
@@ -15,14 +15,13 @@ OK, so we know that all elements in the result appear in the input.
 \frametitle{The Limits of Parametricity}
 \framesubtitle{No pretending}
 By types (proof) alone, it is not possible to narrow down to one possibility in
-the \emph{general case} \footnote{This is \textbf{not} permission to examine the
-identifier name for clues.}.
+the \emph{general case}
 \begin{block}{However}
 \begin{itemize}
-  \item We can provide once-inhabitance for some specific cases.
-  \item Types are proof-positive.
-  \item We have tools to assist us when we come up against these limitations.
-  \item Tests are failed proof-negative.
+  \item We can provide once-inhabitance for some specific cases
+  \item Types are proof-positive
+  \item We have tools to assist us when we come up against these limitations
+  \item Tests are failed proof-negative
 \end{itemize}
 \end{block}
 \end{frame}
@@ -74,6 +73,6 @@ We can't!
 \frametitle{The Limits of Parametricity}
 \framesubtitle{Coding exercise \textemdash parametric}
 \begin{center}
-The function, \lstinline{thisIsNotReverse} definitely reverses the list \textbf{without looking at the source code or the function name}.
+The function, \lstinline{thisIsNotReverse} definitely reverses the list \textbf{without looking at the source code or the function name}
 \end{center}
 \end{frame}

@@ -7,15 +7,17 @@ def forallM[F[_]: Monad]
 \begin{theorem}
   The \lstinline{Boolean} result depends on zero or more of
   \begin{itemize}
-    \item Whether the \lstinline{Option} is a \lstinline{Some} or \lstinline{None}.
-    \item If the \lstinline{Option} is a \lstinline{Some}, then the result of having applied the given function to the \lstinline{Some} value.
+    \item None of its arguments
+    \item Whether the \lstinline{Option} is a \lstinline{Some} or \lstinline{None}
+    \item If the \lstinline{Option} is a \lstinline{Some}, then the result of having applied the given function to the \lstinline{Some} value
+    \item in other words, one of \lstinline{(2 * 2 * 2)} inhabitants
   \end{itemize}
 \end{theorem}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
-  We can conclude that there are 8 possible inhabitants \ref{forallM}:
+  We conclude that there are 8 possible inhabitants \ref{forallM}:
   \begin{enumerate}
     \item always \lstinline{false}
     \item always \lstinline{true}
@@ -31,14 +33,14 @@ def forallM[F[_]: Monad]
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
   \begin{block}{Importantly}
-  The implementation may only use the monad primitive operations, even though the use-case may apply a specific monad context.
+  The implementation may only use the monad primitive operations, even though the use-case may apply a specific monad context. If it were a specific monad (e.g. \lstinline{M=List}), the inhabitants become unmanageable
   \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
   \begin{block}{For example}
-  The \lstinline{forallM} function definitely does not perform any IO effects, even though the function user may apply that specific use-case.
+  The \lstinline{forallM} function definitely does not perform any IO effects, even though the function user may apply that specific use-case
   \end{block}
   and so on \ldots
 \end{frame}

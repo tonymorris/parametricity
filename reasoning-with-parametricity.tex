@@ -29,7 +29,7 @@ def `irrelevant`[A](x: List[A]): List[A]
 \end{lstlisting}
 \begin{itemize}
   \item We can immediately assert, with confidence, a lot of things about how this function works \emph{because it is parametric\footnote{or polymorphic}}
-  \item More directly, we assert what the function does not do.
+  \item More directly, we assert what the function does not do
   \item<2> In other words, \emph{parametricity} has improved readability
   \item<2> Really? By how much?
 \end{itemize}
@@ -43,7 +43,7 @@ def `irrelevant`[A](x: List[A]): List[A] =
   ...
 \end{lstlisting}
 \begin{theorem}Every element \lstinline{A} in the result list appears in the input list\end{theorem}
-\begin{theorem}Contrapose: If \lstinline{A} is not in the input, it is not in the result\end{theorem}
+\begin{theorem}Contraposed, If \lstinline{A} is not in the input, it is not in the result\end{theorem}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -102,9 +102,3 @@ such reasoning.}
 \end{block}
 What does this mean exactly?
 \end{frame}
-
-% [a] -> [a]
-% [a] -> Int
-% [a] -> [b]
-% (a -> b) -> (b -> c) -> (a -> c)
-% (a -> m Bool) -> [a] -> m [a]

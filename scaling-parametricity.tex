@@ -1,7 +1,7 @@
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
 \begin{lstlisting}[style=scala]
-def forallM[F[_]: Monad]
+def forallM[F[_]: Monad, A]
   (p: A => F[Boolean], o: Option[A]): F[Boolean]
 \end{lstlisting}
 \begin{theorem}

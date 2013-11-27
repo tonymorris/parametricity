@@ -1,7 +1,7 @@
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
 \begin{lstlisting}[style=scala]
-def forallM[F[_]: Monad]
+def forallM[F[_]: Monad, A]
   (p: A => F[Boolean], o: Option[A]): F[Boolean]
 \end{lstlisting}
 \begin{theorem}
@@ -11,6 +11,7 @@ def forallM[F[_]: Monad]
     \item Whether the \lstinline{Option} is a \lstinline{Some} or \lstinline{None}
     \item If the \lstinline{Option} is a \lstinline{Some}, then the result of having applied the given function to the \lstinline{Some} value
     \item in other words, one of \lstinline{(2 * 2 * 2)} inhabitants
+    \item \emph{Multiple applications of sequencing of the effect (\lstinline{F[Boolean]}) in the \lstinline{Some case}}
   \end{itemize}
 \end{theorem}
 \end{frame}
@@ -33,14 +34,14 @@ def forallM[F[_]: Monad]
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
   \begin{block}{Importantly}
-  The implementation may only use the monad primitive operations, even though the use-case may apply a specific monad context. If it were a specific monad (e.g. \lstinline{M=List}), the inhabitants become unmanageable
+  The implementation may only use the monad primitive operations, even though the use-case may apply a specific monad context. If it were a specific monad (e.g. \lstinline{F=List}), the inhabitants become unmanageable
   \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Scaling Parametricity}
   \begin{block}{For example}
-  The \lstinline{forallM} function definitely does not perform any IO effects, even though the function user may apply that specific use-case
+  The \lstinline{forallM} function definitely does not perform any IO effects (\lstinline{F=IO}), even though the function user may apply that specific use-case
   \end{block}
   and so on \ldots
 \end{frame}

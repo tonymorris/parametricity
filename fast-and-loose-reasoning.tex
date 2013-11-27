@@ -18,21 +18,16 @@ Actually, the \lstinline{even} function doesn't even return.
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{fact}Non-totality is a consequence of any turing-complete system\end{fact}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
 \begin{itemize}
-  \item This means that any turing-complete system will permit \emph{escape hatches for partiality}.
-  \item Each turing-complete system has different, specialised mechanisms that permit partiality.
-  \item These escape hatches undermine the value of our assertions \ldots but let's not throw away everything.
+  \item Any turing-complete system will permit a mechanism for \emph{partiality}.
+  \item Total systems, such as Agda, may denote partiality as an effect, while enforcing termination otherwise.
+  \item Some implementations of these mechanisms undermine the value of our assertions \ldots however, in that case, let's not throw away everything.
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{Scala has a \sout{few} lot of escape hatches}
+\begin{block}{Scala has a \sout{few} lot of undermining escape hatches}
 \begin{itemize}
   \item \lstinline{null}
   \item exceptions

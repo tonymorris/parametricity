@@ -19,9 +19,10 @@ Actually, the \lstinline{even} function doesn't even return.
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
 \begin{itemize}
-  \item Any turing-complete system will permit a mechanism for \emph{partiality}.
-  \item Total systems\footnote{such as Agda} may denote partiality as an effect, while enforcing termination otherwise.
-  \item Some implementations of these mechanisms undermine the value of our assertions \ldots however, in that case, let's not throw away everything.
+  \item Turing-complete systems will always provide some kind of mechanism for \emph{partiality}.
+  \item Total systems\footnote{such as Agda} may denote partiality as an effect, thus maintaining totality.
+  \item However, some denotations of partiality are more crude and undermine the value of our assertions\ldots
+  \item \ldots but let's not throw away our reasoning abilities just yet.
 \end{itemize}
 \end{frame}
 
@@ -123,7 +124,7 @@ def reverse[A, B](x: List[A]): List[B] =
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
 \begin{itemize}
-  \item For example, Haskell disables side-effects, type-casing and type-casting, \emph{obtaining a total, relative advantage}
+  \item For example, Haskell disables side-effects, type-casing and type-casting, \emph{giving a significant advantage for no penalty}
   \item Agda goes further by disabling non-termination, again to its advantage
   \item so what about Scala?
   \item can we use a reliable subset without too much penalty?

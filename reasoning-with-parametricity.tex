@@ -60,35 +60,14 @@ def `irrelevant`[A](x: List[A]): List[A] =
 
 \begin{frame}[fragile]
 \frametitle{Reasoning with parametricity}
-\begin{block}{Another example}
-\begin{lstlisting}[style=scala]
-def reverse[A, B](x: List[A]): List[B] = 
-  ...
-\end{lstlisting}
-\end{block}
-\begin{theorem}This function reverses the input list, because the name says so\end{theorem}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Reasoning with parametricity}
-\begin{block}{Lies}
-\begin{lstlisting}[style=scala]
-def reverse[A, B](x: List[A]): List[B] = 
-  ...
-\end{lstlisting}
-\end{block}
-\begin{theorem}This function \textbf{always} returns \lstinline{Nil} otherwise it would not have compiled\end{theorem}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Reasoning with parametricity}
 \begin{block}{Uninhabited Example}
 \begin{lstlisting}[style=scala]
 def irrelevant[A, B](a: A): B = 
   ...
 \end{lstlisting}
 \end{block}
-\begin{theorem}This function \textbf{never} returns because it will never compile\end{theorem}
+\begin{theorem}This function \textbf{never} returns because if it did, it would
+never have compiled\end{theorem}
 \end{frame}
 
 \begin{frame}[fragile]

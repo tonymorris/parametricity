@@ -13,17 +13,8 @@ def even(p: Int): Boolean =
 def even(p: Int): Boolean = 
   even(p)
 \end{lstlisting}
-Actually, the \lstinline{even} function doesn't even return.
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\begin{itemize}
-  \item Turing-complete systems will always provide some kind of mechanism for \emph{partiality}.
-  \item Total systems\footnote{such as Agda} may denote partiality as an effect, thus maintaining totality.
-  \item However, some denotations of partiality are more crude and undermine the value of our assertions\ldots
-  \item \ldots but let's not throw away our reasoning abilities just yet.
-\end{itemize}
+Actually, the \lstinline{even} function doesn't even return, \emph{yet we
+exclude this possibility in discussion}.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -51,7 +42,7 @@ def `irrelevant`[A](x: List[A]): List[A] =
   null
 \end{lstlisting}
 \begin{theorem}Every \lstinline{A} element in the result list appears in the input list\end{theorem}
-Well, not if you don't even have a list.
+Well, not if you don't even return a list.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -115,8 +106,6 @@ def reverse[A, B](x: List[A]): List[B] =
 \frametitle{Fast and Loose Reasoning}
 \begin{itemize}
   \item Scala sure does have a lot of escape hatches!
-  \item to what extent do they pervade our reasoning abilities?
-  \item let us reframe the question
   \item if we abandon all these escape hatches, to what extent is the programming environment disabled?
 \end{itemize}
 \end{frame}
@@ -125,7 +114,6 @@ def reverse[A, B](x: List[A]): List[B] =
 \frametitle{Fast and Loose Reasoning}
 \begin{itemize}
   \item For example, Haskell disables side-effects, type-casing and type-casting, \emph{giving a significant advantage for no penalty}
-  \item Agda goes further by disabling non-termination, again to its advantage
   \item so what about Scala?
   \item can we use a reliable subset without too much penalty?
 \end{itemize}
@@ -133,7 +121,7 @@ def reverse[A, B](x: List[A]): List[B] =
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\frametitle{Safe Scala subset}
+\frametitle{The Scalazzi Safe Scala subset}
 \begin{center}
 Yes.
 \end{center}
@@ -144,7 +132,7 @@ And we do.
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{Safe Scala subset}
+\begin{block}{The Scalazzi Safe Scala subset}
 \begin{itemize}
   \item \sout{\lstinline{null}}
   \item \sout{exceptions}
@@ -161,7 +149,7 @@ And we do.
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{Safe Scala subset}
+\begin{block}{The Scalazzi Safe Scala subset}
 \begin{itemize}
   \item<1> We have now \textbf{improved} our reasoning abilities, but at what cost?
   \item<2> It turns out that eliminating these escape hatches results in a \textbf{significant language improvement} with minimal, orthogonal, easily-managed penalties
@@ -190,6 +178,6 @@ Parametricity is principled and it works
 \includegraphics[height=3.8cm]{image/AbstractWigglyTwoppedHoopyWrapperZipdiddyQuip.png}
 \end{center}
 \begin{center}
-If you do not exploit it, I will judge you
+Tell me again about this "real world." 
 \end{center}
 \end{frame}

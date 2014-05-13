@@ -34,6 +34,14 @@ def `irrelevant`[A](x: List[A]): List[A]
   \item<2> Really? By how much?
 \end{itemize}
 \end{block}
+\tiny{
+\begin{lstlisting}
+List<A> `irrelevant`<A>(List<A> x) // C#
+\end{lstlisting}
+\begin{lstlisting}
+<A> List<A> `irrelevant`(List<A> x) // Java
+\end{lstlisting}
+}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -43,6 +51,15 @@ def `irrelevant`[A](x: List[A]): List[A] =
   ...
 \end{lstlisting}
 \begin{theorem}Every element \lstinline{A} in the result list appears in the input. Contraposed, If \lstinline{A} is not in the input, it is not in the result\end{theorem}
+\tiny{
+\begin{lstlisting}
+List<A> `irrelevant`<A>(List<A> x) // C#
+\end{lstlisting}
+\begin{lstlisting}
+<A> List<A> `irrelevant`(List<A> x) // Java
+\end{lstlisting}
+}
+
 \end{frame}
 
 \begin{frame}[fragile]
@@ -68,6 +85,14 @@ def irrelevant[A, B](a: A): B =
 \end{block}
 \begin{theorem}This function \textbf{never} returns because if it did, it would
 never have compiled\end{theorem}
+\tiny{
+\begin{lstlisting}
+List<B> `irrelevant`<A, B>(List<A> x) // C#
+\end{lstlisting}
+\begin{lstlisting}
+<A, B> List<B> `irrelevant`(List<A> x) // Java
+\end{lstlisting}
+}
 \end{frame}
 
 \begin{frame}[fragile]

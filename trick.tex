@@ -2,8 +2,60 @@
 \frametitle{The Parametricity Trick}
 \begin{block}{This will only work if\ldots}
 \begin{itemize}
-\item You write computer programs by with inveterate exploitation of the functional programming thesis
-\item You understand that anything else is \textbf{completely insane}
+\item<1-> you write computer programs with inveterate exploitation of the functional programming thesis
+\item<1-> you understand that anything else is \textbf{completely insane}
+\item<2-> and if you don't, you're just being a wrong person
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reminder}
+\begin{block}{So what is functional programming?}
+\begin{itemize}
+\item<1-> a means of programming by which expressions are \emph{referentially transparent}.
+\item<2-> but what is referential transparency?
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{Referential Transparency}
+\begin{itemize}
+  \item<1> referential transparency is a potential property of expressions
+  \item<2> functions provide users with referentially transparent expressions
+\end{itemize}
+\begin{block}<3>{The Test for Referential Transparency}
+An expression \lstinline$expr$ is referentially transparent if in all programs \lstinline$p$, all occurrences of \lstinline$expr$ in \lstinline$p$ can be replaced by the result assigned to \lstinline$expr$ without causing an observable effect on \lstinline$p$.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Referential Transparency}
+\begin{block}<1>{Example program}
+\begin{lstlisting}
+p = {
+  result = expr
+  result = expr
+  f(expr, expr)
+}
+\end{lstlisting}
+\end{block}
+\begin{block}<2>{Refactoring of program}
+\begin{lstlisting}
+p = {
+  f(result, result)
+}
+\end{lstlisting}
+\end{block}
+\begin{block}<3>{}
+Is the program refactoring observable for all values of \lstinline$f$?
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Functional Programming}
+\begin{center}
+FP is a commitment to preserving referential transparency
+\end{center}
 \end{frame}

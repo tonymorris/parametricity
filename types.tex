@@ -1,0 +1,115 @@
+\begin{frame}
+\frametitle{What is Parametricity}
+\begin{block}{Danielsson, Hughes, Jansson \& Gibbons \cite{danielsson2006fast} tell us:}
+\begin{quotation}
+Functional programmers often reason about programs as if
+they were written in a total language, expecting the results
+to carry over to non-total (partial) languages. We justify
+such reasoning.
+\end{quotation}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\frametitle{What is Parametricity}
+\begin{block}{Philip Wadler \cite{wadler1989theorems} tells us:}
+\begin{quotation}
+Write down the definition of a polymorphic function on a piece of paper. Tell me its type, but be careful not to let me see the function's definition. I will tell you a theorem that the function satisfies.
+
+The purpose of this paper is to explain the trick.
+\end{quotation}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Types}
+\begin{block}{first let's talk about types}
+Suppose we encountered the following function definition:
+\begin{lstlisting}
+int add12(int)
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+  \item<1-> by the type alone, there are {$({2^{32}})^{2^{32}}$} possible implementations
+  \item<2-> but this is a significantly smaller number than \rotatebox{90}{8}
+  \item<3-> \emph{Importantly, we know nothing more about this function from its type}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Types}
+\framesubtitle{reading the code}
+We might form a suspicion that \lstinline[style=scala]$add12$ adds twelve to its argument
+\begin{lstlisting}[style=scala]
+int `add12`(int)
+\end{lstlisting}
+\begin{tikzpicture}[remember picture,overlay]
+\coordinate (aa) at ($(a1)+(7,2.0)$);
+\node[note,draw,callout relative pointer={($(aa)-(12.8,-3.3)$)},right] at (aa) {\includegraphics[width=0.2\textwidth]{image/suspicion.jpg}};
+\end{tikzpicture}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Types}
+So we write some speculative tests to relieve our anxiety:
+\begin{lstlisting}
+add12(0)        = 12
+add12(5)        = 17
+add12(-5)       = 7
+add12(223)      = 235
+add12(5096)     = 5104
+add12(2914578)  = 29145590
+add12(-2914578) = -29145566
+\end{lstlisting}
+And pat ourselves on the back, concluding, yes, this function adds twelve to its argument
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Types}
+\framesubtitle{Woops!}
+\begin{block}{and then}
+\begin{lstlisting}
+def add12(n: Int): Int =
+  if(n < 8000000) n + 12
+  else n * 7
+\end{lstlisting}
+\end{block}
+We need to narrow down the potential propositions about what this function does not do.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Types}
+\begin{block}{another monomorphic example}
+\begin{lstlisting}
+List<int> function(List<int>)
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+  \item<1-> adds 17 to every 11th element?
+  \item<2-> drops every prime number?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{a polymorphic example}
+\begin{lstlisting}
+<A> List<A> function(List<A>)
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+  \item<1-> this function returns elements in a list that always appear in the argument
+  \item<1-> \textbf{or it would not have compiled}
+  \item<2-> Convince yourself of this. Commit to this statement.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{the goal}
+\begin{itemize}
+  \item<1-> a significant number of possible things that this function does are eliminated, by no expenditure of effort
+  \item<2-> theorems about this function can be reliably constructed
+\end{itemize}
+\end{block}
+\end{frame}

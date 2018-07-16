@@ -1,18 +1,24 @@
-\documentclass{beamer}
+\documentclass[
+  xcolor={svgnames},
+  hyperref={colorlinks,citecolor=DeepPink4,linkcolor=DarkRed,urlcolor=DarkBlue}
+  ]{beamer}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
 \usepackage[utf8]{inputenc}
-\usepackage{graphics}
+\usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{wasysym}
 \usepackage{listings}
 \usepackage{tikz}
-\usepackage{amssymb}
 \usepackage[normalem]{ulem}
 \usepackage{textcomp}
 \usepackage{verbatim}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
+\usepackage[framemethod=tikz]{mdframed}
+
 \usetikzlibrary{shapes.callouts,shadows, calc}
 
 \tikzset{note/.style={rectangle callout, rounded corners,fill=gray!20,drop shadow,font=\footnotesize}}    
@@ -65,14 +71,72 @@
   basicstyle=\ttfamily,
   moredelim=**[is][\btHL]{`}{`}
 }
-\lstdefinestyle{java}{
-  language=java,
-  basicstyle=\footnotesize\ttfamily,
-  stringstyle=\color{darkgreen}\ttfamily,
-  commentstyle=\color{gray}\ttfamily,
-  keywordstyle=\footnotesize\color{blue}\ttfamily,
-  tabsize=2,
-  moredelim=**[is][\btHL]{`}{`}
+\lstdefinelanguage{java}{
+  morekeywords={abstract,assert,boolean,break%
+    byte,case,catch,char,class,const,continue%
+    default,do,double,else,enum,extends,false%
+    final,finally,float,for,goto,if,implements%
+    import,instanceof,int,interface,long,native%
+    new,null,package,private,protected,public%
+    return,short,static,strictfp,super,switch%
+    synchronized,this,throw,throws,transient%
+    true,try,void,volatile,while},
+  otherkeywords={=,=>,<-,<\%,<:,>:,\#,@},
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[n]{/*}{*/},
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+\lstdefinelanguage{csharp}
+{
+  sensitive=true,
+  morekeywords=[1]{
+  abstract, as, base, break, case,
+  catch, checked, class, const, continue,
+  default, delegate, do, else, enum,
+  event, explicit, extern, false,
+  finally, fixed, for, foreach, goto, if,
+  implicit, in, interface, internal, is,
+  lock, namespace, new, null, operator,
+  out, override, params, private,
+  protected, public, readonly, ref,
+  return, sealed, sizeof, stackalloc,
+  static, struct, switch, this, throw,
+  true, try, typeof, unchecked, unsafe,
+  using, virtual, volatile, while, bool,
+  byte, char, decimal, double, float,
+  int, lock, object, sbyte, short, string,
+  uint, ulong, ushort, void},
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l][keywordstyle4]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+\lstdefinelanguage{haskell}{
+  morekeywords={class,instance,where,do,data,newtype,default,deriving,module},
+  otherkeywords={<-},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[n]{\{-}{-\}}, 
+  morestring=[b]",
+  morestring=[b]',
+  morestring=[b]"""
+}
+\lstdefinelanguage{python}{
+ keywords={catch, def, float, lambda, in, int, null, self, str, switch, typeof},
+ keywordstyle=\color{ForestGreen}\bfseries,
+ ndkeywords={boolean, throw, import},
+ ndkeywords={return, class, if ,elif, endif, while, do, else, True, False , catch, def},
+ ndkeywordstyle=\color{red}\bfseries,
+ identifierstyle=\color{black},
+ sensitive=false,
+ comment=[l]{\#},
+ morecomment=[s]{/*}{*/},
+ commentstyle=\color{purple}\ttfamily,
+ stringstyle=\color{red}\ttfamily,
 }
 \lstdefinelanguage{scala}{
   morekeywords={abstract,case,catch,class,def,%
@@ -90,15 +154,41 @@
   morestring=[b]',
   morestring=[b]"""
 }
-\lstdefinelanguage{haskell}{
-  morekeywords={class,instance,where,do,data,newtype,default,deriving,module},
-  otherkeywords={<-},
-  sensitive=true,
-  morecomment=[l]{--},
-  morecomment=[n]{\{-}{-\}}, 
-  morestring=[b]",
-  morestring=[b]',
-  morestring=[b]"""
+\lstdefinestyle{haskell}{
+  language=haskell,
+  basicstyle=\tiny\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\footnotesize\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
+}
+\lstdefinestyle{java}{
+  language=java,
+  basicstyle=\footnotesize\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\footnotesize\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
+}
+\lstdefinestyle{python}{
+  language=python,
+  basicstyle=\footnotesize\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\footnotesize\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
+}
+\lstdefinestyle{csharp}{
+  language=csharp,
+  basicstyle=\tiny\ttfamily,
+  stringstyle=\color{darkgreen}\ttfamily,
+  commentstyle=\color{gray}\ttfamily,
+  keywordstyle=\tiny\color{blue}\ttfamily,
+  tabsize=2,
+  moredelim=**[is][\btHL]{`}{`}
 }
 \lstdefinestyle{scala}{
   language=scala,
@@ -108,14 +198,6 @@
   keywordstyle=\footnotesize\color{blue}\ttfamily,
   tabsize=2,
   moredelim=**[is][\btHL]{`}{`}
-}
-\lstdefinestyle{haskell}{
-  language=haskell,
-  basicstyle=\tiny\ttfamily,
-  stringstyle=\color{darkgreen}\ttfamily,
-  commentstyle=\color{gray}\ttfamily,
-  keywordstyle=\tiny\color{blue}\ttfamily,
-  tabsize=2
 }
 % #866eaa
 \definecolor{nicta-purple}{rgb}{0.5234,0.4297,0.6640}
@@ -137,32 +219,21 @@
   \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
 }
 
-\logo{\includegraphics[height=0.8cm]{image/nicta.jpg}}
+\logo{\includegraphics[height=0.8cm]{image/data61-csiro.jpg}}
 
-\begin{document}
-\title{\large Parametricity}
-\subtitle{\small Types Are Documentation}
-\institute[NICTA]{}
-\tiny{\date
-
-}
-\normalsize
 
 \setbeamercovered{transparent}
-\begin{frame}
-  \titlepage
-\end{frame}
 
-\input{journey}
-\input{scala}
-\input{trick}
-\input{lossful-reasoning}
-\input{reasoning-with-parametricity}
+\begin{document}
+
+\input{title}
+\input{qfpl}
+\input{introduction}
+\input{types}
 \input{fast-and-loose-reasoning}
-\input{scaling-parametricity}
 \input{limits-of-parametricity}
-\input{conclusion}
+\input{readability}
+\input{questions}
 \input{references}
-\input{forallM}
 
 \end{document}

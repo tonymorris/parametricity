@@ -1,0 +1,157 @@
+\begin{frame}
+\begin{center}
+Let us remind ourselves.
+\end{center}
+\begin{center}
+What is Functional Programming? What does it \emph{mean}?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Suppose the following program \ldots}
+\begin{lstlisting}[style=java]
+int wibble(int a, int b) {
+  counter = counter + 1;
+  return (a + b) * 2;
+}
+
+/* arbitrary code */
+
+blobble(wibble(x, y), wibble(x, y));
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{and we refactor out these common expressions \ldots}
+\begin{lstlisting}[style=java]
+int wibble(int a, int b) {
+  counter = counter + 1;
+  return (a + b) * 2;
+}
+
+/* arbitrary code */
+
+blobble(`wibble(x, y)`, `wibble(x, y)`);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{assign the expression to a value}
+\begin{lstlisting}[style=java]
+int wibble(int a, int b) {
+  counter = counter + 1;
+  return (a + b) * 2;
+}
+
+int r = `wibble(x, y);`
+
+/* arbitrary code */
+
+blobble(`r`, `r`);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{center}
+Did the program just change?
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Yes, the program changed \ldots}
+\begin{lstlisting}[style=java]
+int wibble(int a, int b) {
+  `counter = counter + 1;`
+  return (a + b) * 2;
+}
+
+int r = wibble(x, y);
+
+/* arbitrary code */
+
+blobble(r, r);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Suppose this slightly different program \ldots}
+\begin{lstlisting}[style=java]
+int pibble(int a, int b) {
+  return (a + b) * 2;
+}
+
+/* arbitrary code */
+
+globble(pibble(x, y), pibble(x, y));
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{and we refactor out these common expressions \ldots}
+\begin{lstlisting}[style=java]
+int pibble(int a, int b) {
+  return (a + b) * 2;
+}
+
+/* arbitrary code */
+
+globble(`pibble(x, y)`, `pibble(x, y)`);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{assign the expression to a value}
+\begin{lstlisting}[style=java]
+int pibble(int a, int b) {
+  return (a + b) * 2;
+}
+
+int r = `pibble(x, y);`
+
+/* arbitrary code */
+
+globble(`r`, `r`);
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+This time, did the program just change?
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{block}{It's the same program}
+For given inputs, the same outputs are given, with no observable changes to the program
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Functional Programming is the idea that}
+We can \textbf{always replace expressions with a value, without affecting the program behaviour}
+\end{block}
+\begin{center}
+\tiny{This property of expressions is called \emph{referential transparency}.}
+\end{center}
+\end{frame}
+\begin{frame}
+\begin{block}{Consequences}
+A commitment to Functional Programming has many consequences.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+One of the most important of those is
+\end{center}
+\begin{center}
+Parametricity
+\end{center}
+\end{frame}

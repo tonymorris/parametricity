@@ -1,78 +1,180 @@
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-\begin{lstlisting}[style=scala]
-def thisIsNotReverse[A](x: List[A]): List[A]
+\begin{block}{C\# type signature}
+\begin{lstlisting}[style=csharp]
+List<int> function(List<int>)
 \end{lstlisting}
-OK, so we know that all elements in the result appear in the input
+From the \emph{\textbf{monomorphic} type}, what does this function do?
+\end{block}
+\includegraphics[width=0.2\textwidth]{image/shrug.png}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{C\# type signature}
+\begin{lstlisting}[style=csharp]
+List<A> function<A>(List<A>)
+\end{lstlisting}
+From the \emph{\textbf{polymorphic} type}, what does this function do?
+\end{block}
+\large{\textbf{Fact: all elements in the result appear in the input.}}
+
+\tiny{How do we narrow down to disambiguity?}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{We could}
 \begin{itemize}
- \item but how do we narrow it down?
- \item how do we rule out all possibilities for the type but one?
- \item how do we specifically determine what the function does?
+  \item<1-> write comments above the function
+
+            \lstinline[style=csharp]{/* This function twiddles the database to twoddle out the twip twop */}
+
+            \textbf{OR}
+  \item<2-> write \emph{true} machine-checkable statements about the function
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{what does this function do?}
+\lstinputlisting[style=haskell]{source/reverse-with-tests.hs}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{what does this function do?}
+\lstinputlisting[style=csharp,mathescape]{source/reverse-with-tests.cs}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{another example (Haskell)}
+\begin{lstlisting}[style=haskell,mathescape]
+flatMap :: (a -> List b) -> List a -> List b
+flatMap = $\ldots$
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{another example (C\#)}
+\begin{lstlisting}[style=csharp,mathescape]
+List<B> SelectMany<A, B>(this List<A>, Func<A, List<B>>) {
+  $\ldots$
+}
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{another example}
+\begin{lstlisting}[style=haskell,mathescape]
+flatMap :: (a -> List b) -> List a -> List b
+flatMap = $\ldots$
+\end{lstlisting}
+\begin{lstlisting}[style=csharp,mathescape]
+List<B> SelectMany<A, B>(this List<A>, Func<A, List<B>>) {
+  $\ldots$
+}
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+  \item If the input list is empty, so is the result
+  \item Every \lstinline{(b)} in the result came from application of the given function
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{No pretending}
-By types (proof) alone, it is not possible to narrow down to one possibility in
-the \emph{general case}
-\begin{block}{However}
-\begin{itemize}
-  \item We can provide once-inhabitance for some specific cases
-  \item Types are proof-positive
-  \item We have tools to assist us when we come up against these limitations
-  \item Tests are failed proof-negative
-\end{itemize}
+\frametitle{Once-inhabitance}
+\begin{block}{sometimes tests are unnecessary}
+\begin{lstlisting}[style=haskell]
+f :: a -> a
+\end{lstlisting}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise}
-\begin{block}{Produce an implementation that does \textbf{not} reverse}
-\lstinputlisting[style=haskell]{source/ThisMightReverseInt.hs}
+\frametitle{Once-inhabitance}
+\begin{block}{sometimes tests are unnecessary}
+\begin{lstlisting}[style=haskell]
+g :: Functor f => y -> f x -> f y
+\end{lstlisting}
+\end{block}
+\emph{We already know that}
+\begin{lstlisting}[style=haskell,mathescape]
+$\lambda$> g "hi" [1,2,3]
+["hi","hi","hi"]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Once-inhabitance}
+\begin{block}{sometimes tests are \textbf{almost} unnecessary}
+\begin{lstlisting}[style=haskell]
+h :: a -> a -> a
+\end{lstlisting}
+\begin{lstlisting}[style=csharp]
+A h<A>(A a1, A a2)
+\end{lstlisting}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise}
-\begin{block}{Produce an implementation that does \textbf{not} reverse}
-\lstinputlisting[style=haskell]{source/ThisMightReverseIntAnswer.hs}
+\frametitle{Once-inhabitance}
+\begin{block}{sometimes tests are \textbf{almost} unnecessary}
+\begin{lstlisting}[style=haskell]
+h :: a -> a -> a
+\end{lstlisting}
+\begin{lstlisting}[style=csharp]
+A h<A>(A a1, A a2)
+\end{lstlisting}
+
 \end{block}
+\begin{lstlisting}[style=haskell,mathescape]
+$\lambda$> h 7 8
+7
+\end{lstlisting}
+\begin{lstlisting}[style=csharp]
+csharp> h(7, 8)
+7
+\end{lstlisting}
+\emph{We now know \textbf{precisely} what this function does}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise \textemdash parametric}
-\begin{block}{Produce an implementation that does \textbf{not} reverse}
-\lstinputlisting[style=haskell]{source/ThisMightReverseParametric.hs}
+\frametitle{Parametricity}
+\begin{block}{non-trivial example}
+\begin{lstlisting}[style=haskell]
+both ::
+  (Applicative f, Bitraversable r) =>
+  (a -> f b) -> r a a -> f (r b b)
+\end{lstlisting}
 \end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise \textemdash parametric}
 \begin{center}
-We can't!
+What might this function do and what are the limitations of reasoning?
 \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise \textemdash parametric}
-\begin{block}{The function has been fully-specified by:}
-\begin{itemize}
-  \item The parametric type
-  \item Tests
-\end{itemize}
+\frametitle{Parametricity}
+\begin{block}{and so on}
+\begin{lstlisting}[style=haskell]
+point :: Store a b -> b
+\end{lstlisting}
 \end{block}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
-\framesubtitle{Coding exercise \textemdash parametric}
-\begin{center}
-The function, \lstinline{thisMightReverse} definitely reverses the list \textbf{without looking at the source code or the function name}
-\end{center}
+\frametitle{Parametricity}
+\begin{block}{and on}
+\begin{lstlisting}[style=haskell]
+_1 :: Lens (a, x) (b, x) a b
+\end{lstlisting}
+\end{block}
 \end{frame}

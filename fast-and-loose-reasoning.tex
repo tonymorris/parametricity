@@ -1,197 +1,51 @@
+\begin{frame}
+\frametitle{What is Parametricity}
+\begin{block}{Danielsson, Hughes, Jansson \& Gibbons \cite{danielsson2006fast} tell us:}
+\begin{quotation}
+Functional programmers often reason about programs as if
+they were written in a total language, expecting the results
+to carry over to non-total (partial) languages. We justify
+such reasoning.
+\end{quotation}
+\end{block}
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{lstlisting}[style=scala]
-def even(p: Int): Boolean = 
+\begin{lstlisting}
+boolean even(int i) =
   ...
 \end{lstlisting}
-\begin{theorem}The \lstinline{even} function returns either \lstinline{true} or \lstinline{false}\end{theorem}
-\tiny{
-\begin{lstlisting}
-bool even(int p) // C#
-\end{lstlisting}
-\begin{lstlisting}
-boolean even (int p) // Java
-\end{lstlisting}
-}
-
+We casually say, ``This function returns one of two things.''
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{lstlisting}[style=scala]
-def even(p: Int): Boolean = 
-  even(p)
+\begin{lstlisting}
+boolean even(int i) =
+  even(i)
 \end{lstlisting}
-Actually, the \lstinline{even} function doesn't even return, \emph{yet we
-casually exclude this possibility in discussion}.
+and we can discard this third possibility in our reasoning.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Fast and Loose Reasoning}
-\begin{block}{Scala has a \sout{few} lot of undermining escape hatches}
+\begin{center}
+We are \emph{fast and loose reasoning}.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fast and Loose Reasoning}
+\begin{block}{many programming environments involve some, or all of}
 \begin{itemize}
   \item \lstinline{null}
   \item exceptions
-  \item Type-casing (\lstinline{isInstanceOf})
-  \item Type-casting (\lstinline{asInstanceOf})
+  \item Type-casing
+  \item Type-casting
   \item Side-effects
-  \item \lstinline{equals}/\lstinline{toString}/\lstinline{hashCode}
-  \item \lstinline{notify}/\lstinline{wait}
-  \item \lstinline{classOf}/\lstinline{.getClass}
-  \item General recursion
+  \item universal \lstinline{equals}/\lstinline{toString}
 \end{itemize}
 \end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{\lstinline{null} escape hatch}
-\begin{lstlisting}[style=scala]
-def `irrelevant`[A](x: List[A]): List[A] = 
-  null
-\end{lstlisting}
-\begin{theorem}Every \lstinline{A} element in the result list appears in the input list\end{theorem}
-Well, not if you don't even return a list.
-\textbf{\lstinline$null$ breaks parametricity.}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{\lstinline{type-casing} escape hatch}
-\begin{lstlisting}[style=scala]
-def `irrelevant`[A](x: A): Boolean = 
-  x.isInstanceOf[Int] ||
-  x match {
-    case (s: String) => s.length < 10
-  }
-\end{lstlisting}
-\begin{theorem}This function ignores its argument and consistently returns either \lstinline{true} or \lstinline{false}\end{theorem}
-\textbf{Type-casing\footnote{case-analysis on type} breaks parametricity}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{\lstinline{type-casting} escape hatch}
-\begin{lstlisting}[style=scala]
-def `irrelevant`[A](x: List[A]): List[A] = 
-  "abc".asInstanceOf[A] :: x  
-\end{lstlisting}
-\begin{theorem}Every \lstinline{A} element in the result list appears in the input list\end{theorem}
-\textbf{Type-casting breaks parametricity}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{\lstinline{side-effect} escape hatch}
-\begin{lstlisting}[style=scala]
-def `irrelevant`[A](x: A): A = {
-    println("hi")
-    x
-  }
-\end{lstlisting}
-\begin{theorem}This function only ever does one thing \textemdash return its argument \end{theorem}
-\textbf{Side-effects breaks parametricity}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{\lstinline{toString} escape hatch}
-\begin{lstlisting}[style=scala]
-def `irrelevant`[A](x: A): Int =
-  x.toString.length
-\end{lstlisting}
-\begin{theorem}This function ignores its argument to return one of {${2^{32}}$} values. \end{theorem}
-\textbf{Java's \lstinline$Object$ methods break parametricity}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{where to place our trust?}
-\begin{lstlisting}[style=scala]
-def reverse[A, B](x: List[A]): List[B] = 
-  x.foldLeft[List[B]](Nil)((b, a) =>
-    a.`asInstanceOf`[B] :: b)
-\end{lstlisting}
-\begin{theorem}This function \textbf{always} returns \lstinline{Nil} and so cannot possibly reverse the list\end{theorem}
-\textbf{Type-casting breaks parametricity}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\begin{itemize}
-  \item Scala sure does have a lot of escape hatches!
-  \item if we abandon all these escape hatches, to what extent is the programming environment disabled?
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\begin{itemize}
-  \item For example, Haskell disables side-effects, type-casing and type-casting, \emph{giving a significant advantage for no penalty}
-  \item so what about Scala?
-  \item can we use a reliable subset without too much penalty?
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\frametitle{The Scalazzi Safe Scala Subset}
-\begin{center}
-Yes.
-\end{center}
-\begin{center}
-And we do.
-\end{center}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\begin{block}{The Scalazzi Safe Scala Subset}
-\begin{itemize}
-  \item \sout{\lstinline{null}}
-  \item \sout{exceptions}
-  \item \sout{Type-casing (\lstinline{isInstanceOf})}
-  \item \sout{Type-casting (\lstinline{asInstanceOf})}
-  \item \sout{Side-effects}
-  \item \sout{\lstinline{equals}/\lstinline{toString}/\lstinline{hashCode}}
-  \item \sout{\lstinline{notify}/\lstinline{wait}}
-  \item \sout{\lstinline{classOf}/\lstinline{.getClass}}
-  \item General recursion
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\begin{block}{The Scalazzi Safe Scala Subset}
-\begin{itemize}
-  \item<1> We have now \textbf{improved} our reasoning abilities, but at what cost?
-  \item<2> It turns out that eliminating these escape hatches results in a \textbf{significant language improvement} with minimal, orthogonal, easily-managed penalties
-  \item<3> In other words, we can assume the language subset absent these attributes and by doing so, achieve a large net benefit
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{It works}
-\begin{itemize}
-  \item<1> Some open-source projects, using Scala, even Java and C\#, apply fast and loose reasoning to achieve confidence in the excellence of other team members
-  \item<2> Project contributors rarely step on each others' (or their own) toes precisely because of this optimistic approach
-  \item<3> Cynics fail hard
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Fast and Loose Reasoning}
-\framesubtitle{It works}
-\begin{center}
-Parametricity is principled and it works
-\end{center}
-\begin{center}
-\includegraphics[height=3.8cm]{image/AbstractWigglyTwoppedHoopyWrapperZipdiddyQuip.png}
-\end{center}
-\begin{center}
-Tell me again about this "real world." 
-\end{center}
+For similar reasons, these can all be discarded at no cost.
 \end{frame}

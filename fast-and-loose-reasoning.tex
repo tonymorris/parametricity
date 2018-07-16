@@ -1,0 +1,51 @@
+\begin{frame}
+\frametitle{What is Parametricity}
+\begin{block}{Danielsson, Hughes, Jansson \& Gibbons \cite{danielsson2006fast} tell us:}
+\begin{quotation}
+Functional programmers often reason about programs as if
+they were written in a total language, expecting the results
+to carry over to non-total (partial) languages. We justify
+such reasoning.
+\end{quotation}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fast and Loose Reasoning}
+\begin{lstlisting}
+boolean even(int i) =
+  ...
+\end{lstlisting}
+We casually say, ``This function returns one of two things.''
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fast and Loose Reasoning}
+\begin{lstlisting}
+boolean even(int i) =
+  even(i)
+\end{lstlisting}
+and we can discard this third possibility in our reasoning.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fast and Loose Reasoning}
+\begin{center}
+We are \emph{fast and loose reasoning}.
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Fast and Loose Reasoning}
+\begin{block}{many programming environments involve some, or all of}
+\begin{itemize}
+  \item \lstinline{null}
+  \item exceptions
+  \item Type-casing
+  \item Type-casting
+  \item Side-effects
+  \item universal \lstinline{equals}/\lstinline{toString}
+\end{itemize}
+\end{block}
+For similar reasons, these can all be discarded at no cost.
+\end{frame}

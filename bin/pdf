@@ -7,7 +7,6 @@ DIST=dist
 
 mkdir -p $DIST
 pdflatex -aux-directory=$DIST -output-directory=$DIST $NAME.tex
-# bibtex $DIST/$NAME.aux
-# pdflatex -aux-directory=$DIST -output-directory=$DIST $NAME.tex
-# pdflatex -aux-directory=$DIST -output-directory=$DIST $NAME.tex
-
+bibtex $DIST/$NAME.aux
+pdflatex -aux-directory=$DIST -output-directory=$DIST $NAME.tex
+pdflatex -aux-directory=$DIST -output-directory=$DIST $NAME.tex

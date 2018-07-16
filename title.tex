@@ -1,0 +1,39 @@
+\newmdenv[tikzsetting={draw=black,fill=white,fill opacity=0.7, line width=4pt},backgroundcolor=none,leftmargin=0,rightmargin=0,innertopmargin=4pt]{Conference}
+
+\newmdenv[tikzsetting={draw=black,fill=white,fill opacity=0.7, line width=4pt},backgroundcolor=none,leftmargin=0,rightmargin=0,innertopmargin=4pt,skipbelow=\baselineskip,%
+skipabove=\baselineskip]{TitleBox}
+
+\title{\large Parametricity}
+\subtitle{\large Types are Documentation}
+\institute[Data61]{Data61, CSIRO}
+
+{
+  \usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{image/lambda.png}}
+
+  \begin{frame}[plain] 
+
+  \begin{TitleBox}
+    \begin{center}
+    {\huge \inserttitle}
+
+    \hspace{1em}
+    
+    {\huge \insertsubtitle}
+    \end{center}
+  \end{TitleBox}
+
+  \vspace{3em}
+
+  \begin{Conference}
+    \begin{center}
+    \tiny{CanFP, Canberra, July 2018}
+
+    \hspace{1em}
+
+    {\insertauthor}
+    \end{center}
+  \end{Conference}
+
+  \end{frame}
+
+}

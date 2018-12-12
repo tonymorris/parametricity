@@ -1,8 +1,8 @@
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-\begin{block}{C\# type signature}
+\begin{block}{monomorphic signature}
 \begin{lstlisting}[style=csharp]
-List<int> function(List<int>)
+[Int] -> Int]
 \end{lstlisting}
 From the \emph{\textbf{monomorphic} type}, what does this function do?
 \end{block}
@@ -11,15 +11,35 @@ From the \emph{\textbf{monomorphic} type}, what does this function do?
 
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-\begin{block}{C\# type signature}
+\begin{block}{theorems as types}
 \begin{lstlisting}[style=csharp]
-List<A> function<A>(List<A>)
+[a] -> [a]
 \end{lstlisting}
 From the \emph{\textbf{polymorphic} type}, what does this function do?
 \end{block}
-\large{\textbf{Fact: all elements in the result appear in the input.}}
+\large{\textbf{Theorem: all elements in the result appear in the input.}}
 
-\tiny{How do we narrow down to disambiguity?}
+\tiny{How do we narrow down to disambiguity? How do we make up for this shortcoming?}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{theorems as types}
+\begin{lstlisting}[style=csharp]
+[a] -> [a]
+\end{lstlisting}
+\end{block}
+We know a lot about what it does not do
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The Limits of Parametricity}
+\begin{block}{theorems as types}
+\begin{lstlisting}[style=csharp]
+[a] -> [a]
+\end{lstlisting}
+\end{block}
+\emph{but we don't necessarily know exactly what it does do}
 \end{frame}
 
 \begin{frame}[fragile]

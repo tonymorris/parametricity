@@ -55,7 +55,7 @@ And pat ourselves on the back, concluding, yes, this function adds twelve to its
 \begin{frame}[fragile]
 \frametitle{Types}
 \framesubtitle{Woops!}
-\begin{block}{and then}
+\begin{block}{but we are never sure}
 \begin{lstlisting}
 def add12(n: Int): Int =
   if(n < 8000000) n + 12
@@ -63,6 +63,13 @@ def add12(n: Int): Int =
 \end{lstlisting}
 \end{block}
 We need to narrow down the potential propositions about what this function does not do.
+\end{frame}
+
+\begin{frame}
+\frametitle{Monomorphic}
+\begin{block}{this reasoning is difficult because}
+our types are \emph{monomorphic}
+\end{block}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -94,10 +101,85 @@ List<int> function(List<int>)
 
 \begin{frame}[fragile]
 \frametitle{Parametricity}
+\begin{block}{I repeat}
+\begin{lstlisting}
+[a] -> [a]
+\end{lstlisting}
+\end{block}
+For any function with this type, in the entire universe, every element in the return value appears in the argument value
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
 \begin{block}{the goal}
 \begin{itemize}
   \item<1-> a significant number of possible things that this function does are eliminated, by no expenditure of effort
   \item<2-> theorems about this function can be reliably constructed
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{here is another one \emph{(Haskell)}}
+\begin{lstlisting}
+Maybe a -> [a]
+\end{lstlisting}
+\end{block}
+\begin{itemize}
+  \item<1-> all the \lstinline{a} values in the returned list are the same value
+  \item<2-> if the argument is \lstinline{Nothing} then \lstinline{[]} is returned \emph{(no \lstinline{a} values)}
+  \item<3-> the \lstinline{a} values in the return result is the one in \lstinline{Just}.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{center}
+\begin{lstlisting}
+Maybe a -> [a]
+\end{lstlisting}
+\end{center}
+\begin{block}{I know these theorems}
+\textbf{because it compiles}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{one more}
+\begin{lstlisting}
+Functor f =>
+b -> f a -> f b
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{one more}
+\begin{lstlisting}
+Functor f =>
+b -> f a -> f b
+\end{lstlisting}
+\end{block}
+\textbf{I already know what this function does}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{block}{?}
+\begin{lstlisting}
+Applicative f =>
+b -> f a -> f b
+\end{lstlisting}
+\end{block}
+What about now?
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Parametricity}
+\begin{center}
+There are some limitations of this reasoning
+\end{center}
 \end{frame}

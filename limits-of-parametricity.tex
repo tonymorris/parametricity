@@ -186,6 +186,8 @@ What might this function do and what are the limitations of reasoning?
 \begin{block}{and so on}
 \begin{lstlisting}[style=haskell]
 point :: Store a b -> b
+
+data Store a b = Store (a -> b) b
 \end{lstlisting}
 \end{block}
 \end{frame}

@@ -1,47 +1,154 @@
 \begin{frame}
-\begin{block}{Algebra}
+\begin{block}{Types can tell us about inhabitants}
+Algebraic Data Types can be thought of in terms of regular algebraic equations
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Some examples include}
+\begin{itemize}
+  \item \textbf{sum types}
+
+        \lstinline{Either A B} or ``A or B'' corresponds to the equation \lstinline{A + B}
+  \item \textbf{product types}
+
+        \lstinline{(A, B)} or ``A and B'' corresponds to the equation \lstinline{A * B}
+  \item \textbf{exponentiation}
+
+        \lstinline{A -> B} corresponds to the equation \lstinline{B}\textsuperscript{\lstinline{A}}
+  \item \textbf{unit}
+
+        given \lstinline{data Unit = Unit},
+
+        the \lstinline{Unit} data type corresponds to the value \lstinline{1}
+  \item \textbf{void}
+
+        given \lstinline{data Void},
+
+        the \lstinline{Void} data type corresponds to the value \lstinline{0}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Let's look at \lstinline{Bool}}
+\begin{lstlisting}
+data Bool = True | False
+\end{lstlisting}
+\begin{itemize}
+  \item<1-> The \lstinline{True} constructor has no arguments, which is equivalent to carrying \lstinline{Unit}
+  \item<1-> The \lstinline{False} constructor has no arguments, which is equivalent to carrying \lstinline{Unit}
+  \item<2-> The whole data type carries \lstinline{1} or \lstinline{1}
+  \item<2-> \lstinline{Bool ~ 1 + 1 ~ 2}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{How about \lstinline{Maybe a}}
+\begin{lstlisting}
+data Maybe a = Nothing | Just a
+\end{lstlisting}
+\begin{itemize}
+  \item<1-> The \lstinline{Nothing} constructor has no arguments, which is equivalent to carrying \lstinline{Unit}
+  \item<1-> The \lstinline{Just} constructor has an argument \lstinline{a}
+  \item<2-> The whole data type carries \lstinline{1} or \lstinline{a}
+  \item<2-> \lstinline{Maybe a ~ 1 + a}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{Another one \lstinline{Either Void a}}
+\begin{lstlisting}
+\end{lstlisting}
+\begin{itemize}
+  \item<1-> The \lstinline{Left} constructor carries \lstinline{0}
+  \item<1-> The \lstinline{Right} constructor has an argument \lstinline{a}
+  \item<2-> The whole data type carries \lstinline{0} or \lstinline{a}
+  \item<2-> \lstinline{Either Void a ~ 0 + a ~ a}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{block}{and another \lstinline{(Void, a)}}
+\begin{lstlisting}
+\end{lstlisting}
+\begin{itemize}
+  \item<1-> The whole data type carries \lstinline{0} and \lstinline{a}
+  \item<2-> \lstinline{(Void, a) ~ 0 * a ~ 0}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{lost of \lstinline{Bool}}
+\begin{itemize}
+  \item<1-> \lstinline{(Bool, Bool)}
+  \item<1-> \lstinline{Either Bool Bool}
+  \item<1-> \lstinline{Bool -> Bool}
+  \item<2-> \lstinline{2 * 2}
+  \item<2-> \lstinline{2 + 2}
+  \item<2-> \lstinline{2}\textsuperscript{\lstinline{2}}
+  \item<3-> These are all \lstinline{4}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Inhabitants}
+The resulting algebraic equation gives us the number of \emph{inhabitants}.
+
+Or, the number of values with that type.
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Inhabitants}
+\begin{itemize}
+  \item<1-> \lstinline{Maybe (Bool -> Maybe Bool)}
+  \item<1-> has \lstinline{1 + 2}\textsuperscript{\lstinline{(1 + 2)}} inhabitants
+  \item<1-> \lstinline{9} inhabitants
+  \item<2-> \scriptsize{\lstinline{(Either Bool (Maybe Bool), Bool, (Unit, Bool), Either Void Bool)}}
+  \item<2-> has \lstinline{(2 + (1 + 2)) * 2 * (1 * 2) * (0 + 2)} inhabitants
+  \item<2-> \lstinline{40}
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Algebraically}
 \begin{center}
-Types can tell us about inhabitants
+What is \lstinline{[a]}?
 \end{center}
 \end{block}
 \end{frame}
 
 \begin{frame}
-\begin{block}{Products}
-\begin{center}
-\lstinline{(A, B) ~ A * B}
+\begin{block}{Lists}
+\begin{itemize}
+  \item<1-> \lstinline{[a]} is either zero \lstinline{a} or one \lstinline{a} or two \lstinline{a} \ldots
+  \item<2-> \lstinline{a}\textsuperscript{\lstinline{0}} \lstinline{+ a}\textsuperscript{\lstinline{1}} \lstinline{+ a}\textsuperscript{\lstinline{2}} \ldots
+  \item<3-> using algebraic rules, this simplifies to \lstinline{1 + a * [a]}
+  \item<3-> \lstinline{1} or \lstinline{(a and [a])}
+  \item<3-> The \lstinline{[]} \emph{(carrying \lstinline{Unit})} or \lstinline{(:)} constructor
+\end{itemize}
+\end{block}
+\end{frame}
 
-\lstinline{(Bool, Bool) ~ 2 * 2 = 4}
+\begin{frame}
+\begin{block}{Calculus?}
+\begin{center}
+We can even \emph{differentiate} these data types \ldots
 \end{center}
 \end{block}
 \end{frame}
 
 \begin{frame}
-\begin{block}{Sums}
+\begin{block}{Calculus?}
 \begin{center}
-\lstinline{A | B ~ A + B}
-
-\lstinline{Bool | Bool ~ 2 + 2 = 4}
-\end{center}
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{Exponents}
-\begin{center}
-\lstinline{A -> B ~ B}\textsuperscript{\lstinline{A}}
-
-\lstinline{(Bool, Bool) -> Bool ~ 2}\textsuperscript{\lstinline{2*2}}\lstinline{ = 16}
-\end{center}
-\end{block}
-\end{frame}
-
-\begin{frame}
-\begin{block}{Free variables}
-\begin{center}
-\lstinline{Maybe a ~ 1 | a = 1 + a}
-
-\lstinline{Maybe (Bool, Bool) ~ 1 + 2 * 2 = 5}
+\ldots but that's a talk for another day
 \end{center}
 \end{block}
 \end{frame}

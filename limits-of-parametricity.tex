@@ -1,7 +1,7 @@
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
 \begin{block}{monomorphic signature}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 [Int] -> [Int]
 \end{lstlisting}
 From the \emph{\textbf{monomorphic} type}, what does this function do?
@@ -12,7 +12,7 @@ From the \emph{\textbf{monomorphic} type}, what does this function do?
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
 \begin{block}{theorems as types}
-\begin{lstlisting}[style=csharp]
+\begin{lstlisting}
 [a] -> [a]
 \end{lstlisting}
 From the \emph{\textbf{polymorphic} type}, what does this function do?
@@ -25,7 +25,7 @@ From the \emph{\textbf{polymorphic} type}, what does this function do?
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
 \begin{block}{theorems as types}
-\begin{lstlisting}[style=csharp]
+\begin{lstlisting}
 [a] -> [a]
 \end{lstlisting}
 \end{block}
@@ -35,7 +35,7 @@ We know a lot about what it does not do
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
 \begin{block}{theorems as types}
-\begin{lstlisting}[style=csharp]
+\begin{lstlisting}
 [a] -> [a]
 \end{lstlisting}
 \end{block}
@@ -65,13 +65,6 @@ We know a lot about what it does not do
 
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-\begin{block}{what does this function do?}
-\lstinputlisting[style=csharp,mathescape]{source/reverse-with-tests.cs}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
 \begin{block}{another example (Haskell)}
 \begin{lstlisting}[style=haskell,mathescape]
 flatMap :: (a -> List b) -> List a -> List b
@@ -82,26 +75,10 @@ flatMap = $\ldots$
 
 \begin{frame}[fragile]
 \frametitle{The Limits of Parametricity}
-\begin{block}{another example (C\#)}
-\begin{lstlisting}[style=csharp,mathescape]
-List<B> SelectMany<A, B>(this List<A>, Func<A, List<B>>) {
-  $\ldots$
-}
-\end{lstlisting}
-\end{block}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{The Limits of Parametricity}
 \begin{block}{another example}
-\begin{lstlisting}[style=haskell,mathescape]
+\begin{lstlisting}[style=haskell, mathescape]
 flatMap :: (a -> List b) -> List a -> List b
 flatMap = $\ldots$
-\end{lstlisting}
-\begin{lstlisting}[style=csharp,mathescape]
-List<B> SelectMany<A, B>(this List<A>, Func<A, List<B>>) {
-  $\ldots$
-}
 \end{lstlisting}
 \end{block}
 \begin{itemize}
@@ -113,7 +90,7 @@ List<B> SelectMany<A, B>(this List<A>, Func<A, List<B>>) {
 \begin{frame}[fragile]
 \frametitle{Once-inhabitance}
 \begin{block}{sometimes tests are unnecessary}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 f :: a -> a
 \end{lstlisting}
 \end{block}
@@ -122,7 +99,7 @@ f :: a -> a
 \begin{frame}[fragile]
 \frametitle{Once-inhabitance}
 \begin{block}{sometimes tests are unnecessary}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 g :: Functor f => y -> f x -> f y
 \end{lstlisting}
 \end{block}
@@ -136,11 +113,8 @@ $\lambda$> g "hi" [1,2,3]
 \begin{frame}[fragile]
 \frametitle{Once-inhabitance}
 \begin{block}{sometimes tests are \textbf{almost} unnecessary}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 h :: a -> a -> a
-\end{lstlisting}
-\begin{lstlisting}[style=csharp]
-A h<A>(A a1, A a2)
 \end{lstlisting}
 \end{block}
 \end{frame}
@@ -148,20 +122,12 @@ A h<A>(A a1, A a2)
 \begin{frame}[fragile]
 \frametitle{Once-inhabitance}
 \begin{block}{sometimes tests are \textbf{almost} unnecessary}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 h :: a -> a -> a
 \end{lstlisting}
-\begin{lstlisting}[style=csharp]
-A h<A>(A a1, A a2)
-\end{lstlisting}
-
 \end{block}
-\begin{lstlisting}[style=haskell,mathescape]
+\begin{lstlisting}[mathescape]
 $\lambda$> h 7 8
-7
-\end{lstlisting}
-\begin{lstlisting}[style=csharp]
-csharp> h(7, 8)
 7
 \end{lstlisting}
 \emph{We now know \textbf{precisely} what this function does}
@@ -170,7 +136,7 @@ csharp> h(7, 8)
 \begin{frame}[fragile]
 \frametitle{Parametricity}
 \begin{block}{non-trivial example}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 both ::
   (Applicative f, Bitraversable r) =>
   (a -> f b) -> r a a -> f (r b b)
@@ -184,7 +150,7 @@ What might this function do and what are the limitations of reasoning?
 \begin{frame}[fragile]
 \frametitle{Parametricity}
 \begin{block}{and so on}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 point :: Store a b -> b
 
 data Store a b = Store (a -> b) b
@@ -195,7 +161,7 @@ data Store a b = Store (a -> b) b
 \begin{frame}[fragile]
 \frametitle{Parametricity}
 \begin{block}{and on}
-\begin{lstlisting}[style=haskell]
+\begin{lstlisting}
 _1 :: Lens (a, x) (b, x) a b
 \end{lstlisting}
 \end{block}

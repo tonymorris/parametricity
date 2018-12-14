@@ -153,7 +153,7 @@ What might this function do and what are the limitations of reasoning?
 \begin{lstlisting}
 point :: Store a b -> b
 
-data Store a b = Store (a -> b) b
+data Store a b = Store (a -> b) a
 \end{lstlisting}
 \end{block}
 \end{frame}

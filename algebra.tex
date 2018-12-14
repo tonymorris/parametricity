@@ -1,0 +1,47 @@
+\begin{frame}
+\begin{block}{Algebra}
+\begin{center}
+Types can tell us about inhabitants
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Products}
+\begin{center}
+\lstinline{(A, B) ~ A * B}
+
+\lstinline{(Bool, Bool) ~ 2 * 2 = 4}
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Sums}
+\begin{center}
+\lstinline{A | B ~ A + B}
+
+\lstinline{Bool | Bool ~ 2 + 2 = 4}
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Exponents}
+\begin{center}
+\lstinline{A -> B ~ B}\textsuperscript{\lstinline{A}}
+
+\lstinline{(Bool, Bool) -> Bool ~ 2}\textsuperscript{\lstinline{2*2}}\lstinline{ = 16}
+\end{center}
+\end{block}
+\end{frame}
+
+\begin{frame}
+\begin{block}{Free variables}
+\begin{center}
+\lstinline{Maybe a ~ 1 | a = 1 + a}
+
+\lstinline{Maybe (Bool, Bool) ~ 1 + 2 * 2 = 5}
+\end{center}
+\end{block}
+\end{frame}

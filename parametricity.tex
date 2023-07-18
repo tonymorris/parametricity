@@ -21,8 +21,8 @@
 
 \usetikzlibrary{shapes.callouts,shadows, calc}
 
-\tikzset{note/.style={rectangle callout, rounded corners,fill=gray!20,drop shadow,font=\footnotesize}}    
-\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}    
+\tikzset{note/.style={rectangle callout, rounded corners,fill=gray!20,drop shadow,font=\footnotesize}}
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
 \newcounter{image}
 \setcounter{image}{1}
@@ -36,7 +36,7 @@
   \begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
 }
 \def\bt@HL@endenv{%
-  \end{btHighlight}%   
+  \end{btHighlight}%
   \egroup
 }
 \newcommand{\bt@HL@box}[2][]{%
@@ -120,7 +120,7 @@
   otherkeywords={<-},
   sensitive=true,
   morecomment=[l]{--},
-  morecomment=[n]{\{-}{-\}}, 
+  morecomment=[n]{\{-}{-\}},
   morestring=[b]",
   morestring=[b]',
   morestring=[b]"""
@@ -219,15 +219,12 @@
   \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
 }
 
-\logo{\includegraphics[height=0.8cm]{image/data61-csiro.jpg}}
-
 
 \setbeamercovered{transparent}
 
 \begin{document}
 
 \input{title}
-\input{qfpl}
 \input{introduction}
 \input{algebra}
 \input{types}
